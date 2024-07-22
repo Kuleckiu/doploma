@@ -8,7 +8,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Клонируем репозиторий
-                git 'git@github.com:Kuleckiu/doploma.git/'
+                                    git url: 'git@github.com:Kuleckiu/doploma.git', branch: 'main'
             }
         }
 
