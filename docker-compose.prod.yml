@@ -1,0 +1,38 @@
+
+services:
+  db:
+    image: mysql:5.7
+    container_name: db2
+    volumes:
+      - db_data_prod:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: prod_root_password
+      MYSQL_DATABASE: wordpress_prod
+      MYSQL_USER: wordpress_user
+      MYSQL_PASSWORD: prod_password
+    networks:
+      - nginx_network
+
+  wordpress:
+    image: wordpress:latest
+    container_name: wordpress2
+    volumes:
+      - wordpress_data_prod:/var/www/html
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wordpress_user
+      WORDPRESS_DB_PASSWORD: prod_password
+      WORDPRESS_DB_NAME: wordpress_prod
+    ports:
+      - "8080:80"
+    networks:
+      - nginx_network
+
+volumes:
+  db_data_prod:
+  wordpress_data_prod:
+networks:
+  nginx_network:
+    external: true
