@@ -8,7 +8,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Клонируем репозиторий
-                                    git url: 'git@github.com:Kuleckiu/doploma.git', branch: 'main'
+                                    git credentialsId: 'jenkins (private ssh key for jenkins)',  url: 'git@github.com:Kuleckiu/doploma.git', branch: 'main'
             }
         }
 
