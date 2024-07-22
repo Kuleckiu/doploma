@@ -7,7 +7,7 @@ variable "google_credentials_file" {
 variable "name" {
   description = "name"
   type = string
-  default = "bababoy"
+  default = "wordpress"
 }
 
 variable "projectgcpid" {
@@ -35,6 +35,6 @@ variable "fierwall_tags" {
   default = {
     fierwall-http-https = "fierwall-http-https"
     fierwall-ssh = "fierwall-ssh"
-    fierwall-kuber = "fierwall-kuber"
+    fierwall-wordpress = "fierwall-wordpress"
   }
 }

@@ -20,11 +20,6 @@ variable "machinetype1" {
   default = "e2-medium"
 }
 
-variable "machinetype2" {
-  description = "type of machine"
-  type = string
-  default = "e2-micro"
-}
 
 variable "image" {
   description = "image"
@@ -44,4 +39,9 @@ variable "ssh_user" {
 
 variable "ssh_public_key" {
   type = string
+}
+
+variable "inventorynamefile" {
+  type = string
+  default = "/home/rootuser/doploma/ansible/inventories/inventory"
 }

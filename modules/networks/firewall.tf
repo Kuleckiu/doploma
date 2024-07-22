@@ -21,13 +21,12 @@ resource "google_compute_firewall" "fierwall-ssh" {
 }
 
 resource "google_compute_firewall" "fierwall-kuber" {
-  name = "${var.name}-fierwall-kuber"
+  name = "${var.name}-fierwall-wordpress"
   network = google_compute_network.mynetwork.name
   allow {
     protocol = "tcp"
-    ports    = ["53", "68", "323", "6443", "44111", "2379-2381", "10248-10260", "10250", "30000-32767", "2376", "8472", "9099",  "2379-2380", "9100", "9090", "3000" ]
-    # ports = [53, 68, 323, 6443, 44111, 2379-2381, 10248-10260, 10250, 30000-32767, 2376, 8472, 9099, 2379-2380, 9100, 9090, 3000]
+    ports    = ["8080"]
   }
   source_ranges = ["0.0.0.0/0"]
-  target_tags = [ var.fierwall_tags["fierwall-kuber"] ]
+  target_tags = [ var.fierwall_tags["fierwall-wordpress"] ]
 }

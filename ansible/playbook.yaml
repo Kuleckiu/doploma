@@ -4,9 +4,3 @@
   become: yes
   roles:
     - kubernetes_master
-
-- name: Setup Kubernetes Worker Nodes
-  hosts: kubworker
-  become: yes
-  roles:
-    - kubernetes_worker
