@@ -4,7 +4,7 @@ pipeline {
         pollSCM('* * * * *')
     }
     environment {
-        DOCKER_CREDENTIALS_ID = credentialsId('iddockerhub') // ID ваших учетных данных Docker Hub в Jenkins
+        DOCKER_CREDENTIALS_ID = 'iddockerhub' // ID ваших учетных данных Docker Hub в Jenkins
         DOCKER_IMAGE_NAME = 'kuleckiu/wordpressprod' // Замените на ваше имя пользователя и имя образа
         DOCKER_COMPOSE_FILE = 'docker-compose.prod.yml'
     }
