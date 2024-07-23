@@ -16,6 +16,14 @@ pipeline {
                 git credentialsId: '1e3ace67-f6bd-462f-90b8-c7fe272007ac',  url: 'git@github.com:Kuleckiu/doploma.git', branch: 'main'
             }
         }
+        stage('Terraform Apply') {
+            steps {
+                script {
+                    // Применение Terraform для создания инстанса
+                    sh 'cd /home/rootuser/doploma && terraform init && terraform apply -auto-approve'
+                    }
+            }
+        }
         stage('build wordpress image') {
             steps {
                 sh "docker-compose -f ${DOCKER_COMPOSE_FILE} build"
