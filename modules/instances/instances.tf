@@ -37,7 +37,7 @@ resource "google_compute_instance" "kubmaster" {
 resource "local_file" "ansible_inventory" {
   content = <<EOF
 [kubmaster]
-master ansible_host=${google_compute_instance.kubmaster.network_interface.0.access_config.0.nat_ip} ansible_user=${var.ssh_user} ansible_ssh_private_key_file=/home/rootuser/doploma/rsaa
+master ansible_host=${google_compute_instance.kubmaster.network_interface.0.access_config.0.nat_ip} ansible_user=${var.ssh_user} ansible_ssh_private_key_file=rsaa
 [kubworker]
 EOF
 
@@ -48,7 +48,7 @@ resource "null_resource" "test_ssh_master" {
   depends_on = [google_compute_instance.kubmaster]
 
   provisioner "local-exec" {
-    command = "ssh -o StrictHostKeyChecking=no -i /home/rootuser/doploma/rsaa ${var.ssh_user}@${google_compute_instance.kubmaster.network_interface.0.access_config.0.nat_ip} 'echo SSH to master successful'"
+    command = "ssh -o StrictHostKeyChecking=no -i rsaa ${var.ssh_user}@${google_compute_instance.kubmaster.network_interface.0.access_config.0.nat_ip} 'echo SSH to master successful'"
   }
 }
 
@@ -56,6 +56,6 @@ resource "null_resource" "run_ansible_playbook" {
   depends_on = [google_compute_instance.kubmaster, google_compute_instance.kubworker, local_file.ansible_inventory]
 
   provisioner "local-exec" {
-    command = "ansible-playbook -i /home/rootuser/doploma/ansible/inventories/inventory /home/rootuser/doploma/ansible/playbook.yaml --ssh-common-args='-o StrictHostKeyChecking=no'"
+    command = "ansible-playbook -i ansible/inventories/inventory ansible/playbook.yaml --ssh-common-args='-o StrictHostKeyChecking=no'"
   }
 }

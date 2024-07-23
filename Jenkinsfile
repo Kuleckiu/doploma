@@ -27,7 +27,7 @@ pipeline {
         }
         stage('build wordpress image') {
             steps {
-                sh "docker-compose -f ${DOCKER_COMPOSE_FILE} build"
+                sh "docker compose -f ${DOCKER_COMPOSE_FILE} build"
             }
         }
         stage('Login to Docker Hub') {
@@ -45,7 +45,7 @@ pipeline {
             steps {
                 script {
                     // Пушим образ в Docker Hub
-                    sh "docker tag your-service-name:latest ${DOCKER_IMAGE_NAME}:latest" // Замените your-service-name на имя вашего сервиса
+                    sh "docker tag wordpressdi:latest ${DOCKER_IMAGE_NAME}:latest" // Замените your-service-name на имя вашего сервиса
                     sh "docker push ${DOCKER_IMAGE_NAME}:latest"
                 }
             }

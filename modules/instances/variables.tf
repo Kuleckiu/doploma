@@ -43,5 +43,5 @@ variable "ssh_public_key" {
 
 variable "inventorynamefile" {
   type = string
-  default = "/home/rootuser/doploma/ansible/inventories/inventory"
+  default = "ansible/inventories/inventory"
 }
