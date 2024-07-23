@@ -21,7 +21,9 @@ pipeline {
                 script {
                     // Применение Terraform для создания инстанса
                     sh 'pwd'
-                    sh 'terraform init && terraform apply -auto-approve'
+                    sh 'terraform init '
+                    sh 'terraform plan'
+                    sh 'terraform apply -auto-approve'
                     }
             }
         }
