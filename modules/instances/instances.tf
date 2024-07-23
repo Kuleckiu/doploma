@@ -53,7 +53,7 @@ resource "null_resource" "test_ssh_master" {
 }
 
 resource "null_resource" "run_ansible_playbook" {
-  depends_on = [google_compute_instance.kubmaster, google_compute_instance.kubworker, local_file.ansible_inventory]
+  depends_on = [google_compute_instance.kubmaster, local_file.ansible_inventory]
 
   provisioner "local-exec" {
     command = "ansible-playbook -i ansible/inventories/inventory ansible/playbook.yaml --ssh-common-args='-o StrictHostKeyChecking=no'"
