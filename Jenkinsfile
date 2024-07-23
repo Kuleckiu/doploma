@@ -20,7 +20,8 @@ pipeline {
             steps {
                 script {
                     // Применение Terraform для создания инстанса
-                    sh 'cd /home/rootuser/doploma && terraform init && terraform apply -auto-approve'
+                    sh 'pwd'
+                    sh 'terraform init && terraform apply -auto-approve'
                     }
             }
         }
