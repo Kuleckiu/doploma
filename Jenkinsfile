@@ -1,7 +1,7 @@
 pipeline {
     agent any
-    triggers {
-        pollSCM('* * * * *')
+    // triggers {
+    //     pollSCM('* * * * *')
     }
     environment {
         DOCKER_CREDENTIALS_ID = 'iddockerhub' // ID ваших учетных данных Docker Hub в Jenkins
