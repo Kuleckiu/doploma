@@ -38,7 +38,6 @@ resource "local_file" "ansible_inventory" {
   content = <<EOF
 [kubmaster]
 master ansible_host=${google_compute_instance.kubmaster.network_interface.0.access_config.0.nat_ip} ansible_user=${var.ssh_user} ansible_ssh_private_key_file=rsaa
-[kubworker]
 EOF
 
   filename = var.inventorynamefile
