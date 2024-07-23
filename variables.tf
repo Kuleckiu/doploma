@@ -1,7 +1,7 @@
 variable "google_credentials_file" {
   description = "Path to Google Cloud credentials JSON file"
   type = string
-  default = "$TF_VAR_google_credentials_file"
+  default = "/home/rootuser/tms-git/new-poject-425116-b1de9f7edb20.json"
 }
 
 variable "name" {
