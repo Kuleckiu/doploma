@@ -39,7 +39,7 @@ pipeline {
         }
         stage('build wordpress image') {
             steps {
-                sh "docker compose -f ${DOCKER_COMPOSE_FILE} build"
+                sh "docker compose -f docker-compose.prod.yml build"
             }
         }
         stage('Login to Docker Hub') {
