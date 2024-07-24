@@ -7,6 +7,7 @@ pipeline {
         DOCKER_CREDENTIALS_ID = 'iddockerhub' // ID ваших учетных данных Docker Hub в Jenkins
         DOCKER_IMAGE_NAME = 'kuleckiu/wordpressprod' // Замените на ваше имя пользователя и имя образа
         DOCKER_COMPOSE_FILE = 'docker-compose.prod.yml'
+        PRIVATE_KEY = 'rsaaprivatedoplom'
     }
 
     stages {
@@ -24,10 +25,12 @@ pipeline {
                     sh 'terraform init '
                     sh 'terraform plan'
                     sh 'terraform apply -auto-approve'
+                    sh 'chmod 600 rsaa'
                     sh 'ansible-playbook -i ansible/inventories/inventory ansible/playbook.yaml --ssh-common-args=-o StrictHostKeyChecking=no'
                     }
             }
         }
+        
         // stage('build wordpress image') {
         //     steps {
         //         sh "docker compose -f ${DOCKER_COMPOSE_FILE} build"
