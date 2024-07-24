@@ -26,7 +26,7 @@ pipeline {
                     sh 'terraform plan'
                     // sh 'terraform apply -auto-approve'
                     sh 'chmod 600 rsaa'
-                    sh 'ansible-playbook -i ansible/inventories/inventory ansible/playbook.yaml --ssh-common-args=-o StrictHostKeyChecking=no'
+                    sh 'ansible-playbook -i ansible/inventories/inventory ansible/playbook.yaml'
                     }
             }
         }
