@@ -43,13 +43,13 @@ EOF
   filename = var.inventorynamefile
 }
 
-resource "null_resource" "test_ssh_master" {
-  depends_on = [google_compute_instance.kubmaster]
+# resource "null_resource" "test_ssh_master" {
+#   depends_on = [google_compute_instance.kubmaster]
 
-  provisioner "local-exec" {
-    command = "ssh -o StrictHostKeyChecking=no -i rsaa ${var.ssh_user}@${google_compute_instance.kubmaster.network_interface.0.access_config.0.nat_ip} 'echo SSH to master successful'"
-  }
-}
+#   provisioner "local-exec" {
+#     command = "ssh -o StrictHostKeyChecking=no -i rsaa ${var.ssh_user}@${google_compute_instance.kubmaster.network_interface.0.access_config.0.nat_ip} 'echo SSH to master successful'"
+#   }
+# }
 
 resource "null_resource" "run_ansible_playbook" {
   depends_on = [google_compute_instance.kubmaster, local_file.ansible_inventory]
