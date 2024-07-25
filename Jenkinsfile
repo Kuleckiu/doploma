@@ -27,6 +27,17 @@ pipeline {
                 }
             }
         }
+        stage('Check for changes') {
+            steps {
+                script {
+                    // Получаем список изменённых файлов
+                    def changedFiles = sh(script: 'git diff --name-only HEAD~1 HEAD', returnStdout: true).trim().split('\n')
+                    env.CHANGED_FILES = changedFiles.join(' ')
+                    echo "Изменённые файлы:\n${changedFiles.join('\n')}"
+                }
+            }
+        }
+
         stage('Terraform Apply') {
             steps {
                 script {
