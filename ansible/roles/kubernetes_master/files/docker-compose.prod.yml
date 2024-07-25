@@ -11,8 +11,8 @@ services:
       MYSQL_DATABASE: wordpress_prod
       MYSQL_USER: wordpress_user
       MYSQL_PASSWORD: prod_password
-    networks:
-      - nginx_network
+    # networks:
+    #   - nginx_network
 
   wordpress:
     image: wordpress:latest
@@ -27,12 +27,12 @@ services:
       WORDPRESS_DB_NAME: wordpress_prod
     ports:
       - "8080:80"
-    networks:
-      - nginx_network
+    # networks:
+    #   - nginx_network
 
 volumes:
   db_data_prod:
   wordpress_data_prod:
-networks:
-  nginx_network:
-    external: true
+# networks:
+#   nginx_network:
+#     external: true
