@@ -15,10 +15,16 @@ pipeline {
             steps {
                 // Клонируем репозиторий
                 git credentialsId: '1e3ace67-f6bd-462f-90b8-c7fe272007ac',  url: 'git@github.com:Kuleckiu/doploma.git', branch: 'main'
-                sh 'git fetch origin'
-                sh 'git diff HEAD origin/main'
+                
             }
         }
+        stage('Create private file')
+            steps {
+                script {
+                    sh "echo '$PRIVATE_KEY' > rsaa"
+                    sh 'chmod 600 rsaa'
+                }
+            }
         stage('Terraform Apply') {
             steps {
                 script {
@@ -34,10 +40,12 @@ pipeline {
         stage('Ansible') {
             steps {
                 script {
-                    sh 'chmod 600 rsaa'
+                    // sshagent(['${PRIVATE_KEY}']) {
+                    // sh 'chmod 600 rsaa'
                     sh 'ansible-playbook -i ansible/inventories/inventory ansible/playbook.yaml'
                 }
-            }
+                }
+            // }
         }     
 
         // stage('Check for changes') {
