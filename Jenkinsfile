@@ -21,8 +21,8 @@ pipeline {
         stage('Create private file') {
             steps {
                 script {
-                    def privateKey = credentials(PRIVATE_KEY_ID)
-                    writeFile file: 'rsaa', text: privateKey
+                    withCredentials([sshUserPrivateKey(credentialsId: PRIVATE_KEY_ID, keyFileVariable: 'PRIVATE_KEY_FILE')]) {
+                        writeFile file: 'rsaa', text: readFile(PRIVATE_KEY_FILE)}
                     sh 'chmod 600 rsaa'
                 }
             }
