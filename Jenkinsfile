@@ -18,13 +18,14 @@ pipeline {
                 
             }
         }
-        stage('Create private file')
+        stage('Create private file') {
             steps {
                 script {
                     sh "echo '$PRIVATE_KEY' > rsaa"
                     sh 'chmod 600 rsaa'
                 }
             }
+        }
         stage('Terraform Apply') {
             steps {
                 script {
