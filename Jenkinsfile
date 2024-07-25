@@ -1,8 +1,6 @@
 pipeline {
     agent any
-    // triggers {
-    //     pollSCM('* * * * *')
-    // }
+    
     environment {
         // DOCKER_CREDENTIALS_ID = 'iddockerhub' // ID ваших учетных данных Docker Hub в Jenkins
         // DOCKER_IMAGE_NAME = 'kuleckiu/wordpressprod' // Замените на ваше имя пользователя и имя образа
@@ -34,6 +32,11 @@ pipeline {
                     def changedFiles = sh(script: 'git diff --name-only HEAD~1 HEAD', returnStdout: true).trim().split('\n')
                     env.CHANGED_FILES = changedFiles.join(' ')
                     echo "Изменённые файлы:\n${changedFiles.join('\n')}"
+                    if (changedFiles.size() == 0) {
+                        echo "Нет изменений с последней сборки."
+                    } else {
+                        echo "Изменения найдены: ${changedFiles.size()} файлов."
+                    }
                 }
             }
         }
