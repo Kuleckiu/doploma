@@ -4,9 +4,9 @@ pipeline {
     //     pollSCM('* * * * *')
     // }
     environment {
-        DOCKER_CREDENTIALS_ID = 'iddockerhub' // ID ваших учетных данных Docker Hub в Jenkins
-        DOCKER_IMAGE_NAME = 'kuleckiu/wordpressprod' // Замените на ваше имя пользователя и имя образа
-        DOCKER_COMPOSE_FILE = 'docker-compose.prod.yml'
+        // DOCKER_CREDENTIALS_ID = 'iddockerhub' // ID ваших учетных данных Docker Hub в Jenkins
+        // DOCKER_IMAGE_NAME = 'kuleckiu/wordpressprod' // Замените на ваше имя пользователя и имя образа
+        // DOCKER_COMPOSE_FILE = 'docker-compose.prod.yml'
         PRIVATE_KEY = 'rsaaprivatedoplom'
     }
 
@@ -21,7 +21,8 @@ pipeline {
         stage('Create private file') {
             steps {
                 script {
-                    sh "echo '$PRIVATE_KEY' > rsaa"
+                    def privateKey = credentials(PRIVATE_KEY_ID)
+                    writeFile file: 'rsaa', text: privateKey
                     sh 'chmod 600 rsaa'
                 }
             }
@@ -42,7 +43,7 @@ pipeline {
             steps {
                 script {
                     // sshagent(['${PRIVATE_KEY}']) {
-                    // sh 'chmod 600 rsaa'
+                    sh 'chmod 600 rsaa'
                     sh 'ansible-playbook -i ansible/inventories/inventory ansible/playbook.yaml'
                 }
                 }
