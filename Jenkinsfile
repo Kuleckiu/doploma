@@ -36,32 +36,7 @@ pipeline {
                     sh 'ansible-playbook -i ansible/inventories/inventory ansible/playbook.yaml'
                 }
             }
-        }
-        stage('build wordpress image') {
-            steps {
-                sh "docker compose -f docker-compose.prod.yml build"
-            }
-        }
-        stage('Login to Docker Hub') {
-            steps {
-                script {
-                    // Вход в Docker Hub
-                    docker.withRegistry('https://index.docker.io/v1/', DOCKER_CREDENTIALS_ID) {
-                        
-                    }
-                }
-            }
-        }
-
-        stage('Push Docker Image') {
-            steps {
-                script {
-                    // Пушим образ в Docker Hub
-                    sh "docker tag wordpressdi:latest ${DOCKER_IMAGE_NAME}:latest" // Замените your-service-name на имя вашего сервиса
-                    sh "docker push ${DOCKER_IMAGE_NAME}:latest"
-                }
-            }
-        }
+        }     
 
         // stage('Check for changes') {
         //     steps {
