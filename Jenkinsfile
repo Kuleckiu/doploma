@@ -15,6 +15,8 @@ pipeline {
             steps {
                 // Клонируем репозиторий
                 git credentialsId: '1e3ace67-f6bd-462f-90b8-c7fe272007ac',  url: 'git@github.com:Kuleckiu/doploma.git', branch: 'main'
+                sh 'git fetch origin'
+                sh 'git diff HEAD origin/main'
             }
         }
         stage('Terraform Apply') {
