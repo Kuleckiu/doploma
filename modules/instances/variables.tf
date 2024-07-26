@@ -45,3 +45,7 @@ variable "inventorynamefile" {
   type = string
   default = "ansible/inventories/inventory"
 }
+
+variable "ssh_private_key" {
+  type = string
+}

@@ -1,6 +1,12 @@
 ---
-- name: Setup Kubernetes Master Node
+- name: Setup Docker on instance
   hosts: kubmaster
   become: yes
   roles:
     - kubernetes_master
+
+- name: Docker compose Up
+  hosts: kubmaster
+  become: yes
+  roles:
+    - docker_compose_up

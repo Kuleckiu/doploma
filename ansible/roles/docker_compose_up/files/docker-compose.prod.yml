@@ -22,7 +22,7 @@ services:
     restart: always
     environment:
       WORDPRESS_DB_HOST: db:3306
-      WORDPRESS_DB_USER: wordpress_user
+      WORDPRESS_DB_USER: wordpress_user1
       WORDPRESS_DB_PASSWORD: prod_password
       WORDPRESS_DB_NAME: wordpress_prod
     ports:

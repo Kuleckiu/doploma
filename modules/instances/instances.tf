@@ -26,7 +26,7 @@ resource "google_compute_instance" "kubmaster" {
     connection {
       type        = "ssh"
       user        = var.ssh_user
-      private_key = file("rsaa")
+      private_key = file(var.ssh_private_key)
       host        = google_compute_instance.kubmaster.network_interface.0.access_config.0.nat_ip
     }
   }

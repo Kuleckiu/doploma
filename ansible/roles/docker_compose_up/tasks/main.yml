@@ -1,0 +1,8 @@
+---
+    - name: docker compose copy file
+      copy:
+        src: docker-compose.prod.yml
+        dest: .
+    
+    - name: docker compose up
+      command: docker compose -f docker-compose.prod.yml up -d

@@ -2,9 +2,6 @@ pipeline {
     agent any
     
     environment {
-        // DOCKER_CREDENTIALS_ID = 'iddockerhub' // ID ваших учетных данных Docker Hub в Jenkins
-        // DOCKER_IMAGE_NAME = 'kuleckiu/wordpressprod' // Замените на ваше имя пользователя и имя образа
-        // DOCKER_COMPOSE_FILE = 'docker-compose.prod.yml'
         PRIVATE_KEY_ID = 'rsaaprivatedoplom'
         JSON_FILE_ID_GCP = 'JsonForGcp'
     }
@@ -73,30 +70,5 @@ pipeline {
                 }
             }
         }
-    
-        // stage('Check for changes') {
-        //     steps {
-        //         script {
-        //             // Получаем список изменённых файлов
-        //             def changedFiles = sh(script: 'git diff --name-only HEAD~1 HEAD', returnStdout: true).trim().split('\n')
-
-        //             // Проверяем изменённые файлы и выполняем соответствующие команды
-        //             if (changedFiles.any { it.endsWith('.yml') || it.endsWith('.yaml') }) {
-        //                 echo 'Ansible files changed. Running Ansible...'
-        //                 sh 'ansible-playbook your_playbook.yml'
-        //             } else if (changedFiles.any { it.endsWith('.tf') }) {
-        //                 echo 'Terraform files changed. Running Terraform...'
-        //                 sh 'terraform apply -auto-approve'
-        //             } 
-        //             // else if (changedFiles.any { it.endsWith('.') }) {
-        //             //     echo 'Terraform files changed. Running Terraform...'
-        //             //     sh 'terraform apply -auto-approve'
-        //             // }
-        //              else {
-        //                 echo 'No relevant changes detected.'
-        //             }
-        //         }
-        //     }
-        // }
     }
 }
