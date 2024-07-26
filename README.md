@@ -1,1 +1,1 @@
-# doploma
+# Diplom by Kuletski Stanislav 2024 from group tms DOS20-onl/DevOps
