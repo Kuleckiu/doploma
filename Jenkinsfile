@@ -66,23 +66,7 @@ pipeline {
         stage('Check Service Availability') {
             steps {
                 script {
-                    // Извлечение IP-адреса из inventory файла
-                    def inventoryFile = readFile 'ansible/inventories/inventory'
-                    def ipAddressLine = inventoryFile.split('\n').find { it.contains('ansible_host') }
-                    def ipAddress = ipAddressLine ? ipAddressLine.split('=')[1]?.trim() : null
-
-                    if (ipAddress) {
-                        echo "IP-адрес из инвентори файла: ${ipAddress}"
-                        // Проверка доступности сервиса с помощью curl
-                        def response = sh(script: "curl -s -o /dev/null -w '%{http_code}' http://${ipAddress}", returnStdout: true).trim()
-                        if (response == '200') {
-                            echo "Сервис доступен"
-                        } else {
-                            error "Сервис недоступен, код ответа: ${response}"
-                        }
-                    } else {
-                        error "IP-адрес не найден в инвентори файле"
-                    }
+                    sh 'python3 extract_and_curl.py'
                 }
             }
         }
