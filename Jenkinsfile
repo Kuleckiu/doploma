@@ -6,6 +6,7 @@ pipeline {
         // DOCKER_IMAGE_NAME = 'kuleckiu/wordpressprod' // Замените на ваше имя пользователя и имя образа
         // DOCKER_COMPOSE_FILE = 'docker-compose.prod.yml'
         PRIVATE_KEY_ID = 'rsaaprivatedoplom'
+        JSON_FILE_ID_GCP = 'JsonForGcp'
     }
 
     stages {
@@ -22,6 +23,10 @@ pipeline {
                     withCredentials([sshUserPrivateKey(credentialsId: PRIVATE_KEY_ID, keyFileVariable: 'PRIVATE_KEY_FILE')]) {
                         writeFile file: 'rsaa', text: readFile(PRIVATE_KEY_FILE)}
                     sh 'chmod 600 rsaa'
+                }
+                script {
+                    withCredentials([file(credentialsId: JSON_FILE_ID_GCP, variable: 'JSON_FILE')]) {
+                        writeFile file: 'new-poject-425116-b1de9f7edb20.json', text: readFile(JSON_FILE)}
                 }
             }
         }
@@ -56,12 +61,10 @@ pipeline {
         stage('Ansible') {
             steps {
                 script {
-                    // sshagent(['${PRIVATE_KEY}']) {
                     sh 'chmod 600 rsaa'
                     sh 'ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ansible/inventories/inventory ansible/playbook.yaml'
                 }
                 }
-            // }
         }
         stage('Check Service Availability') {
             steps {
