@@ -69,8 +69,8 @@ pipeline {
                     // Извлечение IP-адреса из inventory файла
                     def inventoryFile = readFile 'ansible/inventories/inventory'
                     def ipAddressLine = inventoryFile.split('\n').find { it.contains('ansible_host') }
-                    def ipAddress = ipAddressLine.split(' ')[0].split('=')[1]?.trim()
-                    
+                    def ipAddress = ipAddressLine ? ipAddressLine.split('=')[1]?.trim() : null
+
                     if (ipAddress) {
                         echo "IP-адрес из инвентори файла: ${ipAddress}"
                         // Проверка доступности сервиса с помощью curl
