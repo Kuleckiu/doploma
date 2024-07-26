@@ -84,7 +84,7 @@ pipeline {
                     }
                 }
             }    
-
+        }
         // stage('Check for changes') {
         //     steps {
         //         script {
