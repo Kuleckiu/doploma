@@ -17,7 +17,7 @@ variable "Pathtoshfile" {
 variable "machinetype1" {
   description = "type of machine"
   type = string
-  default = "e2-micro"
+  default = "e2-medium"
 }
 
 
