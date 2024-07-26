@@ -58,7 +58,7 @@ pipeline {
                 script {
                     // sshagent(['${PRIVATE_KEY}']) {
                     sh 'chmod 600 rsaa'
-                    sh 'ansible-playbook -i ansible/inventories/inventory ansible/playbook.yaml'
+                    sh 'ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ansible/inventories/inventory ansible/playbook.yaml'
                 }
                 }
             // }
