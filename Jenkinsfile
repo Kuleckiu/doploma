@@ -68,7 +68,8 @@ pipeline {
                 script {
                     // Извлечение IP-адреса из inventory файла
                     def inventoryFile = readFile 'ansible/inventories/inventory'
-                    def ipAddress = inventoryFile.split('\n').find { it.contains('ansible_host') }?.split('=')[1]?.trim()
+                    def ipAddressLine = inventoryFile.split('\n').find { it.contains('ansible_host') }
+                    def ipAddress = ipAddressLine.split('=')[1]?.trim()
                     
                     if (ipAddress) {
                         echo "IP-адрес из инвентори файла: ${ipAddress}"
@@ -83,7 +84,7 @@ pipeline {
                         error "IP-адрес не найден в инвентори файле"
                     }
                 }
-            }    
+            }
         }
         // stage('Check for changes') {
         //     steps {
