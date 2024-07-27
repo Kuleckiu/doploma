@@ -83,7 +83,7 @@ services:
       # remember the container_name for elasticsearch?
       # we use it here to access that container
       - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
-      - ELASTICSEARCH_USERNAME=kibana
+      - ELASTICSEARCH_USERNAME=kibana_system
       - ELASTICSEARCH_PASSWORD=${KIBANA_PASSWORD}
       # Change this to true if you want to sent
       # telemetry data to kibana developers
