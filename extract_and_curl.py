@@ -1,5 +1,6 @@
 import re
 import subprocess
+import time
 
 def extract_ip_from_inventory(inventory_file):
     with open(inventory_file, 'r') as file:
@@ -21,7 +22,7 @@ def check_service(ip_address):
 inventory_file = 'ansible/inventories/inventory'
 ip_address = extract_ip_from_inventory(inventory_file)
 print(f"IP-адрес из инвентори файла: {ip_address}")
-
+time.sleep(120)
 http_code = check_service(ip_address)
 print(f"HTTP код ответа: {http_code}")
 
