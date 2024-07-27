@@ -62,6 +62,9 @@ services:
     # give the container a name
     # this will also set the container's hostname as elasticsearch
     container_name: elasticsearch
+    ports:
+      - 9200:9200
+      - 9300:9300
     environment:
       - discovery.type=single-node
       - cluster.name=elasticsearch
@@ -92,6 +95,9 @@ services:
   logstash:
     image: docker.elastic.co/logstash/logstash:8.12.1
     container_name: logstash
+    ports:
+      - 5044:5044
+      - 9600:9600
     command:
       - /bin/bash
       - -c
