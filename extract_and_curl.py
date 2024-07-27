@@ -14,7 +14,7 @@ def extract_ip_from_inventory(inventory_file):
 
 def check_service(ip_address):
     # Выполнение curl запроса на порт 8080
-    response = subprocess.run(['curl', '-s', '-o', '/dev/null', '-w', '%{http_code}', f'http://{ip_address}:5601'], capture_output=True, text=True)
+    response = subprocess.run(['curl', '-s', '-o', '/dev/null', '-w', '%{http_code}', f'http://{ip_address}:5601/login'], capture_output=True, text=True)
     return response.stdout.strip()
 
 # Пример использования
