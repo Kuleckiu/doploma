@@ -1,8 +1,17 @@
 ---
     - name: docker compose copy file
       copy:
-        src: docker-compose.prod.yml
-        dest: .
+        src: "{{ item.src }}" 
+        dest: "{{ item.dest }}"
+      loop:
+        - src: docker-compose.prod.yml
+          dest: .
+        - src: .env
+          dest: .
+        - src: logstash.conf
+          dest: .
+        - src: logstash.yml
+          dest: .
     
     - name: docker compose up
       command: docker compose -f docker-compose.prod.yml up -d
