@@ -13,7 +13,7 @@ variable "name" {
 variable "projectgcpid" {
   description = "Project id"
   type = string
-  default = "new-poject-425116"
+  default = "last-day-430714"
 }
 
 variable "regiongcp" {
