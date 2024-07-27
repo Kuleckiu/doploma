@@ -25,7 +25,7 @@ resource "google_compute_firewall" "fierwall-kuber" {
   network = google_compute_network.mynetwork.name
   allow {
     protocol = "tcp"
-    ports    = ["8080"]
+    ports    = ["8080", "9200", "9300", "5000", "9600", "5601"]
   }
   source_ranges = ["0.0.0.0/0"]
   target_tags = [ var.fierwall_tags["fierwall-wordpress"] ]

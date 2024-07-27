@@ -1,38 +1,77 @@
 
-services:
-  db:
-    image: mysql:5.7
-    container_name: db2
-    volumes:
-      - db_data_prod:/var/lib/mysql
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: prod_root_password
-      MYSQL_DATABASE: wordpress_prod
-      MYSQL_USER: wordpress_user
-      MYSQL_PASSWORD: prod_password
-    # networks:
-    #   - nginx_network
+# services:
+#   db:
+#     image: mysql:5.7
+#     container_name: db2
+#     volumes:
+#       - db_data_prod:/var/lib/mysql
+#     restart: always
+#     environment:
+#       MYSQL_ROOT_PASSWORD: prod_root_password
+#       MYSQL_DATABASE: wordpress_prod
+#       MYSQL_USER: wordpress_user
+#       MYSQL_PASSWORD: prod_password
+#     # networks:
+#     #   - nginx_network
 
-  wordpress:
-    image: wordpress:latest
-    container_name: wordpress2
-    volumes:
-      - wordpress_data_prod:/var/www/html
-    restart: always
+#   wordpress:
+#     image: wordpress:latest
+#     container_name: wordpress2
+#     volumes:
+#       - wordpress_data_prod:/var/www/html
+#     restart: always
+#     environment:
+#       WORDPRESS_DB_HOST: db:3306
+#       WORDPRESS_DB_USER: wordpress_user
+#       WORDPRESS_DB_PASSWORD: prod_password
+#       WORDPRESS_DB_NAME: wordpress_prod
+#     ports:
+#       - "8080:80"
+#     # networks:
+#     #   - nginx_network
+
+# volumes:
+#   db_data_prod:
+#   wordpress_data_prod:
+# # networks:
+# #   nginx_network:
+# #     external: true
+
+
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.2
+    container_name: elasticsearch
     environment:
-      WORDPRESS_DB_HOST: db:3306
-      WORDPRESS_DB_USER: wordpress_user
-      WORDPRESS_DB_PASSWORD: prod_password
-      WORDPRESS_DB_NAME: wordpress_prod
+      - discovery.type=single-node
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
     ports:
-      - "8080:80"
-    # networks:
-    #   - nginx_network
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:7.10.2
+    container_name: logstash
+    ports:
+      - "5000:5000"
+      - "9600:9600"
+    volumes:
+      - ./logstash/pipeline:/usr/share/logstash/pipeline
+    depends_on:
+      - elasticsearch
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.10.2
+    container_name: kibana
+    environment:
+      ELASTICSEARCH_URL: http://elasticsearch:9200
+    ports:
+      - "5601:5601"
+    depends_on:
+      - elasticsearch
 
 volumes:
-  db_data_prod:
-  wordpress_data_prod:
-# networks:
-#   nginx_network:
-#     external: true
+  esdata:
+    driver: local
