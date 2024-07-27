@@ -48,5 +48,4 @@ variable "inventorynamefile" {
 
 variable "ssh_private_key" {
   type = string
-  default = "rsaa"
 }

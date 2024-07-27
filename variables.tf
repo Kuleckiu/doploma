@@ -41,13 +41,11 @@ variable "fierwall_tags" {
 
 variable "publicesshfile" {
   description = "name ssh public file"
-  type = string
   default = "rsaa.pub"
 }
 
 variable "privatesshfile" {
   description = "name ssh private file"
-  type = string
   default = "rsaa"
 }
 
