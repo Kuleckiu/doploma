@@ -19,17 +19,33 @@ def check_service(ip_address):
     return response.stdout.strip()
 
 # Usage example
-inventory_file = 'ansible/inventories/inventory'
-ip_address = extract_ip_from_inventory(inventory_file)
-print(f"IP-the address from the file inventory: {ip_address}")
-# time.sleep(160)
-http_code = check_service(ip_address)
-print(f"HTTP response code: {http_code}")
+# inventory_file = 'ansible/inventories/inventory'
+# ip_address = extract_ip_from_inventory(inventory_file)
+# print(f"IP-the address from the file inventory: {ip_address}")
+# # time.sleep(160)
+# http_code = check_service(ip_address)
+# print(f"HTTP response code: {http_code}")
 
 # Return the completion code for use in Jenkins
-if http_code == "200":
-    exit(0)
-else:
-    time.sleep(10)
-    http_code = check_service(ip_address)
-    print(f"HTTP response code: {http_code}")
+# if http_code == "200":
+#     exit(0)
+# else:
+#     time.sleep(10)
+#     http_code = check_service(ip_address)
+#     print(f"HTTP response code: {http_code}")
+def main():
+    inventory_file = 'ansible/inventories/inventory'
+    ip_address = extract_ip_from_inventory(inventory_file)
+    print(f"IP-адрес из инвентори файла: {ip_address}")
+
+    while True:
+        http_code = check_service(ip_address)
+        print(f"HTTP response code: {http_code}")
+        if http_code == "200":
+            exit(0)
+        else:
+            print("Сервис недоступен. Повторная проверка через 10 секунд...")
+            time.sleep(10)
+
+if __name__ == "__main__":
+    main()
