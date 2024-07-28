@@ -20,7 +20,7 @@ resource "google_compute_firewall" "fierwall-ssh" {
   target_tags = [ var.fierwall_tags["fierwall-ssh"] ]
 }
 
-resource "google_compute_firewall" "fierwall-kuber" {
+resource "google_compute_firewall" "fierwall-elk" {
   name = "${var.name}-fierwall-wordpress"
   network = google_compute_network.mynetwork.name
   allow {
@@ -28,5 +28,5 @@ resource "google_compute_firewall" "fierwall-kuber" {
     ports    = ["8080", "9200", "9300", "5000", "9600", "5601", "5044"]
   }
   source_ranges = ["0.0.0.0/0"]
-  target_tags = [ var.fierwall_tags["fierwall-wordpress"] ]
+  target_tags = [ var.fierwall_tags["fierwall-elk"] ]
 }

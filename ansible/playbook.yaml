@@ -1,12 +1,12 @@
 ---
 - name: Setup Docker on instance
-  hosts: kubmaster
+  hosts: elk
   become: yes
   roles:
-    - kubernetes_master
+    - elk_instans
 
 - name: Docker compose Up
-  hosts: kubmaster
+  hosts: elk
   become: yes
   roles:
     - docker_compose_up

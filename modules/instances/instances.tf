@@ -1,8 +1,8 @@
-resource "google_compute_instance" "kubmaster" {
-  name = "${var.name}-master"
+resource "google_compute_instance" "elk" {
+  name = "${var.name}-elk"
   machine_type = var.machinetype1
     # metadata_startup_script = file(var.Pathtoshfile)
-  tags = [ var.fierwall_tags["fierwall-http-https"], var.fierwall_tags["fierwall-ssh"], var.fierwall_tags["fierwall-wordpress"]  ]
+  tags = [ var.fierwall_tags["fierwall-http-https"], var.fierwall_tags["fierwall-ssh"], var.fierwall_tags["fierwall-elk"]  ]
   boot_disk {
     initialize_params {
       image = var.image
@@ -27,7 +27,7 @@ resource "google_compute_instance" "kubmaster" {
       type        = "ssh"
       user        = var.ssh_user
       private_key = file("rsaa")
-      host        = google_compute_instance.kubmaster.network_interface.0.access_config.0.nat_ip
+      host        = google_compute_instance.elk.network_interface.0.access_config.0.nat_ip
     }
   }
  
@@ -36,8 +36,8 @@ resource "google_compute_instance" "kubmaster" {
 
 resource "local_file" "ansible_inventory" {
   content = <<EOF
-[kubmaster]
-master ansible_host=${google_compute_instance.kubmaster.network_interface.0.access_config.0.nat_ip} ansible_user=${var.ssh_user} ansible_ssh_private_key_file=rsaa
+[elk]
+master ansible_host=${google_compute_instance.elk.network_interface.0.access_config.0.nat_ip} ansible_user=${var.ssh_user} ansible_ssh_private_key_file=rsaa
 EOF
 
   filename = var.inventorynamefile

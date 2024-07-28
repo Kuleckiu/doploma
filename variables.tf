@@ -7,7 +7,7 @@ variable "google_credentials_file" {
 variable "name" {
   description = "name"
   type = string
-  default = "wordpress"
+  default = "elk"
 }
 
 variable "projectgcpid" {

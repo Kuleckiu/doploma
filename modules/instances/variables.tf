@@ -8,11 +8,6 @@ variable "name" {
   type = string
 }
 
-variable "Pathtoshfile" {
-  description = "Path to sh file"
-  type = string
-  default = "sh.sh"
-}
 
 variable "machinetype1" {
   description = "type of machine"
