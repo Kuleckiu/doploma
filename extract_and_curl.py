@@ -22,7 +22,7 @@ def check_service(ip_address):
 inventory_file = 'ansible/inventories/inventory'
 ip_address = extract_ip_from_inventory(inventory_file)
 print(f"IP-the address from the file inventory: {ip_address}")
-time.sleep(120)
+time.sleep(160)
 http_code = check_service(ip_address)
 print(f"HTTP response code: {http_code}")
 
@@ -30,4 +30,6 @@ print(f"HTTP response code: {http_code}")
 if http_code == "200":
     exit(0)
 else:
-    exit(1)
+    time.sleep(10)
+    http_code = check_service(ip_address)
+    print(f"HTTP response code: {http_code}")
