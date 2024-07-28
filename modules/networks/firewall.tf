@@ -21,7 +21,7 @@ resource "google_compute_firewall" "fierwall-ssh" {
 }
 
 resource "google_compute_firewall" "fierwall-elk" {
-  name = "${var.name}-fierwall-wordpress"
+  name = "${var.name}-fierwall-elk"
   network = google_compute_network.mynetwork.name
   allow {
     protocol = "tcp"
