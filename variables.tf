@@ -35,7 +35,7 @@ variable "fierwall_tags" {
   default = {
     fierwall-http-https = "fierwall-http-https"
     fierwall-ssh = "fierwall-ssh"
-    fierwall-wordpress = "fierwall-wordpress"
+    fierwall-elk = "fierwall-elk"
   }
 }
 
