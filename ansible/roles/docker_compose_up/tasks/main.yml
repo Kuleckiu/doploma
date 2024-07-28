@@ -1,5 +1,5 @@
 ---
-    - name: docker compose copy file
+    - name: docker compose copy file 
       copy:
         src: "{{ item.src }}" 
         dest: "{{ item.dest }}"
