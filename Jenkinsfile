@@ -1,6 +1,6 @@
 pipeline {
     agent any
-    //specifying environment variables
+    //specifying environmentsss variables
     environment {
         PRIVATE_KEY_ID = 'rsaaprivatedoplom'
         JSON_FILE_ID_GCP = 'JsonForGcp'
