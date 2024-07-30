@@ -11,7 +11,7 @@ def extract_ip_from_inventory(inventory_file):
     if match:
         return match.group(1)
     else:
-        raise ValueError("IP-адрес не найден в инвентори файле")
+        raise ValueError("IP-adress is not found")
 
 def check_service(ip_address):
     # Executing a curl request 
